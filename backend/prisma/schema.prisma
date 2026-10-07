@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MENTOR
+  ADMIN
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+
+  answers Answer[]
+}
+
+model Question {
+  id          String   @id @default(uuid())
+  title       String
+  body        String
+  isAnonymous Boolean
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+
+  answers Answer[]
+}
+
+model Answer {
+  id        String   @id @default(uuid())
+  body      String
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId String
+}
+
+model Report {
+  id         String   @id @default(uuid())
+  targetType String   // QUESTION | ANSWER | STORY
+  targetId   String
+  reason     String
+
+  status     String   @default("PENDING") // PENDING | RESOLVED
+  action     String?  // HIDE | DISMISS
+
+  createdAt  DateTime @default(now())
+}
+
+model Story {
+  id        String   @id @default(uuid())
+  title     String
+  body      String
+  topic     String?
+  preview   String?
+  status    String   @default("APPROVED") // истории у нас уже готовые
+  createdAt DateTime @default(now())
+}

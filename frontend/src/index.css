@@ -1,0 +1,49 @@
+:root {
+  --bg: #eddfcd;            
+  --card: rgba(255, 255, 255, 0.92);
+  --border: rgba(36, 58, 77, 0.14);
+
+  --text: #1f2f3a;         
+  --muted: rgba(31, 47, 58, 0.65);
+
+  --accent: #9fc6e7;     
+  --accent-2: #bfe3ff; 
+  --accent-dark: #5b8fb9;
+
+  --shadow: 0 12px 30px rgba(31, 47, 58, 0.10);
+  --radius: 18px;
+
+  --maxw: 980px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 500px at 20% 5%, rgba(159, 198, 231, 0.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(191, 227, 255, 0.20), transparent 60%),
+    radial-gradient(900px 500px at 60% 95%, rgba(159, 198, 231, 0.16), transparent 60%),
+    var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(159, 198, 231, 0.35);
+}
